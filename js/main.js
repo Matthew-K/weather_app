@@ -58,3 +58,17 @@ var day3 = example_forecast.forecast.simpleforecast.forecastday[3];
   "skyicon": "mostlysunny"
   },
 */
+
+
+//currently commented out, use examples to finish layout and js 
+/*
+var current_Boston = null;
+$.ajax({
+	  type: 'GET',
+	  url: "http://api.wunderground.com/api/" + private.key + "/forecast/q/MA/Boston.json",
+	  success: function(data) {
+	    console.log("Got data");
+	   	current_Boston = data;
+	  }
+	});
+*/
