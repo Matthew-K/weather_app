@@ -1,11 +1,30 @@
-#today{
-	border: 1px solid black;
-	width: 300px;
+* {
+	
+	box-sizing: border-box;
 }
 
+.grid{
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.weather{
+	margin:0 auto;
+	border: 1px solid black;
+	width: 25%;
+	height: 400px;
+}
+
+.threeDay{
+	border: 1px solid black;
+	width: 25%;
+	height: 400px;
+}
 #credit{
 	margin-top: 35px;
-	width: 300px;
+	margin:0 auto;
+	width: 25%;
 }
 
 #logo{
