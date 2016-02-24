@@ -1,4 +1,13 @@
 #today{
 	border: 1px solid black;
-	width: 250px;
+	width: 300px;
+}
+
+#credit{
+	margin-top: 35px;
+	width: 300px;
+}
+
+#logo{
+	width:100%;
 }
