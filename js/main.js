@@ -22,20 +22,7 @@ $("#humidity").text("Humidity: " + current.relative_humidity);
 $("#wind").text("Wind: " + current.wind_mph);
 
 
-//Today
-var today = example_forecast.forecast.simpleforecast.forecastday[0];
-
-//Day 1
-var day1 = example_forecast.forecast.simpleforecast.forecastday[1];
-
-//Day 2
-var day2 = example_forecast.forecast.simpleforecast.forecastday[2];
-
-//Day 3
-var day3 = example_forecast.forecast.simpleforecast.forecastday[3];
-
-
-/* Easy reference for the three day forecast, removed info that will not be used
+/* Easy reference for the three day forecast, info that will not be used removed
 {
   "date": {
   "pretty": "11:00 PM PDT on June 26, 2012",
@@ -60,22 +47,37 @@ var day3 = example_forecast.forecast.simpleforecast.forecastday[3];
 */
 
 
-//currently commented out, use examples to finish layout and js 
+
+var threeDayForecast = [];
+
 /*
-var current_Boston = null;
+currently commented out, uncomment to run properly
+
 $.ajax({
 	  type: 'GET',
 	  url: "http://api.wunderground.com/api/" + private.key + "/forecast/q/MA/Boston.json",
 	  success: function(data) {
 	    console.log("Got data");
-	   	current_Boston = data;
+	   	//current_Boston = data;
+      console.log(data.forecast.simpleforecast);
+      var simpleForcast = data.forecast.simpleforecast;
+
+      //today
+      threeDayForecast.push(simpleForcast.forecastday[0]);
+      //Day 1
+      threeDayForecast.push(simpleForcast.forecastday[1]);
+
+      //Day 2
+      threeDayForecast.push(simpleForcast.forecastday[2]);
+
+      //Day 3
+      threeDayForecast.push(simpleForcast.forecastday[3]);
 	  }
 	});
 */
 
-
-var threeDayForecast = [today, day1, day2, day3];
-
+/*Able to combine 
+key/conditions/forecast/q/CA/San_Francisco.json
 
 function addDivs(days){
   $("#current").hide();
