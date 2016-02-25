@@ -34,6 +34,7 @@ var day2 = example_forecast.forecast.simpleforecast.forecastday[2];
 //Day 3
 var day3 = example_forecast.forecast.simpleforecast.forecastday[3];
 
+var threeDayForecast = [today, day1, day2, day3];
 
 /* Easy reference for the three day forecast, removed info that will not be used
 {
@@ -72,3 +73,24 @@ $.ajax({
 	  }
 	});
 */
+
+
+//commented out to work out the inner html on a test div
+/*
+function addDivs(){
+  $("#current").remove();
+  for (var i = 0; i < 4; i++){
+      newDiv = document.createElement("div");
+      $(newDiv).attr("id","day"+ i).addClass('threeDay').appendTo(".grid");
+  }
+}
+
+//forEach
+
+$("#test").on("click", addDivs);
+*/
+      newDiv = document.createElement("div");
+      $(newDiv).attr("id","day1").addClass('threeDay').appendTo(".grid");
+
+$("#day1").html("<h1>Test</h1>")
+
