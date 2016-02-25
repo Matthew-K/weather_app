@@ -74,31 +74,16 @@ $.ajax({
 */
 
 
-//commented out to work out the inner html on a test div
-/*
-function addDivs(){
-  $("#current").remove();
-  for (var i = 0; i < 4; i++){
-      newDiv = document.createElement("div");
-      $(newDiv).attr("id","day"+ i).addClass('threeDay').appendTo(".grid");
-  }
-}
-
-//forEach
-
-$("#test").on("click", addDivs);
-*/
- //     newDiv = document.createElement("div");
- //     $(newDiv).attr("id","day1").addClass('threeDay').appendTo(".grid");
 var threeDayForecast = [today, day1, day2, day3];
-function addDivs(){
-  $("#current").remove();
-  for (var i = 0; i < 4; i++){
+
+
+function addDivs(days){
+  $("#current").hide();
+  for (var i = 0; i < days.length; i++){
       newDiv = document.createElement("div");
       $(newDiv).attr("id","day"+ i).addClass('threeDay').appendTo(".grid");
   }
 }
-
 
 /*
 addWeatherTags adds weather ready tags and ids to a div. 
@@ -131,19 +116,17 @@ function fillWeatherContent(day, suffix){
   $("#icon"+ suffix).attr("src", day.icon_url);
 }
 
+function renderThreeDay(){
+  addDivs(threeDayForecast);
+  for (var i = 0; i < threeDayForecast.length; i++){
+    addWeatherTags("#day" + i, i);
+    fillWeatherContent(threeDayForecast[i], i);
+  }
+}
 
-//Testing
-addDivs();
+$("#test").on("click", function(){
+  renderThreeDay();
+  $(this).off('click');
+});
 
-addWeatherTags("#day0", 0);
-fillWeatherContent(threeDayForecast[0], 0);
-
-addWeatherTags("#day1", 1);
-fillWeatherContent(threeDayForecast[1], 1);
-
-addWeatherTags("#day2", 2);
-fillWeatherContent(threeDayForecast[2], 2);
-
-addWeatherTags("#day3", 3);
-fillWeatherContent(threeDayForecast[3], 3);
 
