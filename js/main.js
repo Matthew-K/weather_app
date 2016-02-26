@@ -12,11 +12,14 @@ var data = {
   },
 
   /*threeDayForecast will eventually have four objects containing today's and the next three days' weather data*/
-  threeDayForecast: []
+
+  threeDayForecast: [1,2,3,4]//<-- Numbers are there for temp testing
+
   /*Each object inside threeDayForecast will have the following info. Note: The following only shows the keys that will or might be used in displaying the three day forecast. It does not include all of the keys.
-   
+
     "date": {
     "day": 26,
+    "month": 6,
     "year": 2012,
     "monthname": "June",
     "weekday": "Tuesday",
@@ -51,15 +54,15 @@ function setRightNow(current){
 }
 
 function showCurrent(){
-  $("h1").text(rightNow.location);
+  $("h1").text(data.rightNow.location);
   $("h2").text("Today");
-  $("#temp").text(rightNow.temp);
-  $("#feelsLike").text(rightNow.feelsLike);
-  $("#weather").text(rightNow.conditions);
-  $("#weather_icon").attr("src", rightNow.icon);
-  $("#precip").text("Precipitation: " + rightNow.precipChance + "%");
-  $("#humidity").text("Humidity: " + rightNow.humidity);
-  $("#wind").text("Wind: " + rightNow.wind);
+  $("#temp").text(data.rightNow.temp);
+  $("#feelsLike").text(data.rightNow.feelsLike);
+  $("#weather").text(data.rightNow.conditions);
+  $("#weather_icon").attr("src", data.rightNow.icon);
+  $("#precip").text("Precipitation: " + data.rightNow.precipChance + " %");
+  $("#humidity").text("Humidity: " + data.rightNow.humidity);
+  $("#wind").text("Wind: " + data.rightNow.wind);
 }
 
 /* Easy reference for the three day forecast, info that will not be used removed
@@ -89,32 +92,31 @@ var testingTesting = null;
 function getWeather(){
   $.ajax({
       type: 'GET',
-      url: "http://api.wunderground.com/api/" + private.key + "/forecast/conditions/q/FL/Miami.json",
-      success: function(data) {
-        testingTesting = data;
-        addToThreeDay(data.forecast);
-        var current = data.current_observation;
+      url: "http://api.wunderground.com/api/" + private.key + "/forecast/conditions/q/MA/Boston.json",
+      success: function(info) {
+        console.log("----------------------------");
+        console.log("   Data from API received   ");
+        console.log("----------------------------");
+        testingTesting = info;
+        addToThreeDay(info.forecast);
+        var current = info.current_observation;
         setRightNow(current);
         showCurrent();
       }
     });
 }
 
-//Uncomment below to get data from API
-//getWeather();
-
-function addToThreeDay(data){
-  var simpleForecast = data.simpleforecast.forecastday;
+function addToThreeDay(info){
+  var simpleForecast = info.simpleforecast.forecastday;
   simpleForecast.forEach(function(val){
     data.threeDayForecast.push(val);
   });
 }
 
 function addDivs(days){
-  $("#current").hide();
   for (var i = 0; i < days.length; i++){
       newDiv = document.createElement("div");
-      $(newDiv).attr("id","day"+ i).addClass('threeDay').appendTo(".grid");
+      $(newDiv).attr("id","day"+ i).addClass('threeDay').appendTo("#threeDayTest");
   }
 }
 
@@ -139,9 +141,9 @@ This function is closely related to addWeatherTags. Enter the same suffix used f
 */
 function fillWeatherContent(day, suffix){
   if(suffix === 0){
-    $("#weekday"+ suffix).text("Today");
+    $("#weekday"+ suffix).text("Today " + day.date.month + '/' + day.date.day);
   }else{
-    $("#weekday"+ suffix).text(day.date.weekday);
+    $("#weekday"+ suffix).text(day.date.weekday + ' ' + day.date.month + '/' + day.date.day);
   }
   $("#highTemp"+ suffix).text("High: " + day.high.fahrenheit +" F");
   $("#lowTemp"+ suffix).text("Low: " + day.low.fahrenheit + " F");
@@ -153,13 +155,29 @@ function renderThreeDay(){
   addDivs(data.threeDayForecast);
   for (var i = 0; i < data.threeDayForecast.length; i++){
     addWeatherTags("#day" + i, i);
-    fillWeatherContent(threeDayForecast[i], i);
+    fillWeatherContent(data.threeDayForecast[i], i);
   }
 }
 
-$("#test").on("click", function(){
-  renderThreeDay();
-  $(this).off('click');
+
+$("#test").on("click", function(){  
+  $("#current").hide();
+  $("#threeDayTest").show();
+});
+
+$("#currentButton").on("click", function(){
+  $("#current").show();
+  $("#threeDayTest").hide();
 });
 
 
+
+$("#threeDayTest").hide();
+addDivs(data.threeDayForecast);
+
+
+function init(){
+  getWeather();
+  //Explore why below has to be inside ajax function
+  //showCurrent();
+}
