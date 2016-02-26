@@ -1,6 +1,6 @@
 var data = {
 
-  rightNow: {
+  current: {
     location: null,
     temp: null,
     feelsLike: null,
@@ -11,11 +11,11 @@ var data = {
     wind: null
   },
 
-  /*threeDayForecast will eventually have four objects containing today's and the next three days' weather data*/
+  /*threeDay will eventually have four objects containing today's and the next three days' weather data*/
 
-  threeDayForecast: [1,2,3,4]//<-- Numbers are there for temp testing
+  threeDay: [/*today, day1, day2, day3, day4*/]
 
-  /*Each object inside threeDayForecast will have the following info. Note: The following only shows the keys that will or might be used in displaying the three day forecast. It does not include all of the keys.
+  /*Each object inside threeDay will have the following info. Note: The following only shows the key/value pairs that will or might be used in displaying the three day forecast. It does not include all of the key/value pairs.
 
     "date": {
     "day": 26,
@@ -40,52 +40,26 @@ var data = {
 };
 
 
-function setRightNow(current){
-  data.rightNow = {
-    location: current.display_location.full,
-    temp: current.temp_f,
-    feelsLike: current.feelslike_f,
-    conditions: current.weather,
-    icon: current.icon_url,
-    precipChance: current.precip_today_metric,
-    humidity: current.relative_humidity,
-    wind: current.wind_mph       
+function setCurrent(currentInfo){
+  data.current = {
+    location: currentInfo.display_location.full,
+    temp: currentInfo.temp_f,
+    feelsLike: currentInfo.feelslike_f,
+    conditions: currentInfo.weather,
+    icon: currentInfo.icon_url,
+    precipChance: currentInfo.precip_today_metric,
+    humidity: currentInfo.relative_humidity,
+    wind: currentInfo.wind_mph       
   };
 }
 
-function showCurrent(){
-  $("h1").text(data.rightNow.location);
-  $("h2").text("Today");
-  $("#temp").text(data.rightNow.temp);
-  $("#feelsLike").text(data.rightNow.feelsLike);
-  $("#weather").text(data.rightNow.conditions);
-  $("#weather_icon").attr("src", data.rightNow.icon);
-  $("#precip").text("Precipitation: " + data.rightNow.precipChance + " %");
-  $("#humidity").text("Humidity: " + data.rightNow.humidity);
-  $("#wind").text("Wind: " + data.rightNow.wind);
-}
 
-/* Easy reference for the three day forecast, info that will not be used removed
-{
-  "date": {
-  "day": 26,
-  "year": 2012,
-  "monthname": "June",
-  "weekday": "Tuesday",
-  },
-  "high": {
-  "fahrenheit": "68",
-  "celsius": "20"
-  },
-  "low": {
-  "fahrenheit": "50",
-  "celsius": "10"
-  },
-  "conditions": "Partly Cloudy",
-  "icon_url": "http://icons-ak.wxug.com/i/c/k/partlycloudy.gif",
-  "skyicon": "mostlysunny"
-  },
-*/
+function setthreeDay(info){
+  var simpleForecast = info.simpleforecast.forecastday;
+  simpleForecast.forEach(function(val){
+    data.threeDay.push(val);
+  });
+}
 
 var testingTesting = null;
 
@@ -98,66 +72,83 @@ function getWeather(){
         console.log("   Data from API received   ");
         console.log("----------------------------");
         testingTesting = info;
-        addToThreeDay(info.forecast);
-        var current = info.current_observation;
-        setRightNow(current);
-        showCurrent();
+        setthreeDay(info.forecast);
+        renderthreeDayForecast();
+
+        var currentInfo = info.current_observation;
+        setCurrent(currentInfo);
+        renderCurrent();
       }
     });
 }
 
-function addToThreeDay(info){
-  var simpleForecast = info.simpleforecast.forecastday;
-  simpleForecast.forEach(function(val){
-    data.threeDayForecast.push(val);
-  });
-}
 
-function addDivs(days){
-  for (var i = 0; i < days.length; i++){
-      newDiv = document.createElement("div");
-      $(newDiv).attr("id","day"+ i).addClass('threeDay').appendTo("#threeDayTest");
+var view = {
+  //Renders current weather 
+  renderCurrent: function(){
+    $("h1").text(data.current.location);
+    $("h2").text("Today");
+    $("#temp").text(data.current.temp);
+    $("#feelsLike").text(data.current.feelsLike);
+    $("#weather").text(data.current.conditions);
+    $("#weather_icon").attr("src", data.current.icon);
+    $("#precip").text("Precipitation: " + data.current.precipChance + " %");
+    $("#humidity").text("Humidity: " + data.current.humidity);
+    $("#wind").text("Wind: " + data.current.wind);
+  },
+
+  //Renders the three day forecast
+  renderthreeDayForecast: function(){
+    view.createThreeDayDivs(data.threeDay);
+    for (var i = 0; i < data.threeDay.length; i++){
+      view.addWeatherTags("#day" + i, i);
+      view.fillWeatherContent(data.threeDay[i], i);
+    }
+  },
+
+
+  //Creates four divs in order to show the three day forecast properly
+  createThreeDayDivs: function(days){
+    for (var i = 0; i < days.length; i++){
+        newDiv = document.createElement("div");
+        $(newDiv).attr("id","day"+ i).addClass('threeDay').appendTo("#threeDayTest");
+    }  
+  },
+
+  /*
+  addWeatherTags adds weather ready html tags and ids to each three day forecast div created by createThreeDayDivs. 
+
+  When entering the selector enter as you would when choosing a selector using jQuery. For instance, if the selector you want to has an id named dog, use "#dog" as the selector parameter. 
+
+ 
+  Index corresponds to the index in the threeDay array. It will be used as a suffix for all the ids created by this function
+  */
+  addWeatherTags: function(selector, index){
+    $(selector).append("<p id =weekday" + index +"></p>");
+    $(selector).append("<p id =highTemp" + index +"></p>");
+    $(selector).append("<p id =lowTemp" + index +"></p>");
+    $(selector).append("<p id =weather" + index +"></p>");
+    $(selector).append("<img id =icon" + index +">");
+  },
+
+  /*
+  fillWeatherContent is closely related to addWeatherTags. Enter the same index used for that function in this one to fill in the proper information inside the tags
+  */
+  fillWeatherContent: function(day, index){
+    if(index === 0){
+      $("#weekday"+ index).text("Today " + day.date.month + '/' + day.date.day);
+    }else{
+      $("#weekday"+ index).text(day.date.weekday + ' ' + day.date.month + '/' + day.date.day);
+    }
+    $("#highTemp"+ index).text("High: " + day.high.fahrenheit +" F");
+    $("#lowTemp"+ index).text("Low: " + day.low.fahrenheit + " F");
+    $("#weather"+ index).text(day.conditions);
+    $("#icon"+ index).attr("src", day.icon_url);
   }
-}
+};
 
-/*
-addWeatherTags adds weather ready tags and ids to a div. 
+//init();
 
-When entering the selector enter as you would when choosing a selector using jQuery. For instance, if the selector you want to has an id named dog, use "#dog" as the selector parameter.
-
-Suffix is the string or number you want to use to serve as the suffix for all ids created by this function.
-*/
-function addWeatherTags(selector, suffix){
-  $(selector).append("<p id =weekday" + suffix +"></p>");
-  $(selector).append("<p id =highTemp" + suffix +"></p>");
-  $(selector).append("<p id =lowTemp" + suffix +"></p>");
-  $(selector).append("<p id =weather" + suffix +"></p>");
-  $(selector).append("<img id =icon" + suffix +">");
-}
-
-
-/*
-This function is closely related to addWeatherTags. Enter the same suffix used for that function in this one to fill in the proper information inside the tags
-*/
-function fillWeatherContent(day, suffix){
-  if(suffix === 0){
-    $("#weekday"+ suffix).text("Today " + day.date.month + '/' + day.date.day);
-  }else{
-    $("#weekday"+ suffix).text(day.date.weekday + ' ' + day.date.month + '/' + day.date.day);
-  }
-  $("#highTemp"+ suffix).text("High: " + day.high.fahrenheit +" F");
-  $("#lowTemp"+ suffix).text("Low: " + day.low.fahrenheit + " F");
-  $("#weather"+ suffix).text(day.conditions);
-  $("#icon"+ suffix).attr("src", day.icon_url);
-}
-
-function renderThreeDay(){
-  addDivs(data.threeDayForecast);
-  for (var i = 0; i < data.threeDayForecast.length; i++){
-    addWeatherTags("#day" + i, i);
-    fillWeatherContent(data.threeDayForecast[i], i);
-  }
-}
 
 
 $("#test").on("click", function(){  
@@ -173,9 +164,6 @@ $("#currentButton").on("click", function(){
 
 
 $("#threeDayTest").hide();
-addDivs(data.threeDayForecast);
-
-
 function init(){
   getWeather();
   //Explore why below has to be inside ajax function
