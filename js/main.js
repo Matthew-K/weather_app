@@ -1,33 +1,71 @@
-var current = example_conditions.current_observation;
+var data = {
+
+  rightNow: {
+    location: null,
+    temp: null,
+    feelsLike: null,
+    conditions: null,
+    icon: null,
+    precipChance: null,
+    humidity: null,
+    wind: null
+  },
+
+  /*threeDayForecast will eventually have four objects containing today's and the next three days' weather data*/
+  threeDayForecast: []
+  /*Each object inside threeDayForecast will have the following info. Note: The following only shows the keys that will or might be used in displaying the three day forecast. It does not include all of the keys.
+   
+    "date": {
+    "day": 26,
+    "year": 2012,
+    "monthname": "June",
+    "weekday": "Tuesday",
+    },
+    "high": {
+    "fahrenheit": "68",
+    "celsius": "20"
+    },
+    "low": {
+    "fahrenheit": "50",
+    "celsius": "10"
+    },
+    "conditions": "Partly Cloudy",
+    "icon_url": "http://icons-ak.wxug.com/i/c/k/partlycloudy.gif",
+    "skyicon": "mostlysunny"
+    }
+  */
+};
 
 
-//The following use the current object to get the appropriate weather info 
+function setRightNow(current){
+  data.rightNow = {
+    location: current.display_location.full,
+    temp: current.temp_f,
+    feelsLike: current.feelslike_f,
+    conditions: current.weather,
+    icon: current.icon_url,
+    precipChance: current.precip_today_metric,
+    humidity: current.relative_humidity,
+    wind: current.wind_mph       
+  };
+}
 
-$("h1").text(current.display_location.full);
-
-$("h2").text("Today");
-
-$("#temp").text(current.temp_f);
-
-$("#feelsLike").text(current.feelslike_f);
-
-$("#weather").text(current.weather);
-
-$("#weather_icon").attr("src", current.icon_url);
-
-$("#precip").text("Precipitation: " + current.precip_today_metric + "%");
-
-$("#humidity").text("Humidity: " + current.relative_humidity);
-
-$("#wind").text("Wind: " + current.wind_mph);
-
+function showCurrent(){
+  $("h1").text(rightNow.location);
+  $("h2").text("Today");
+  $("#temp").text(rightNow.temp);
+  $("#feelsLike").text(rightNow.feelsLike);
+  $("#weather").text(rightNow.conditions);
+  $("#weather_icon").attr("src", rightNow.icon);
+  $("#precip").text("Precipitation: " + rightNow.precipChance + "%");
+  $("#humidity").text("Humidity: " + rightNow.humidity);
+  $("#wind").text("Wind: " + rightNow.wind);
+}
 
 /* Easy reference for the three day forecast, info that will not be used removed
 {
   "date": {
-  "pretty": "11:00 PM PDT on June 26, 2012",
   "day": 26,
-  "month": 6,
   "year": 2012,
   "monthname": "June",
   "weekday": "Tuesday",
@@ -46,38 +84,31 @@ $("#wind").text("Wind: " + current.wind_mph);
   },
 */
 
+var testingTesting = null;
 
+function getWeather(){
+  $.ajax({
+      type: 'GET',
+      url: "http://api.wunderground.com/api/" + private.key + "/forecast/conditions/q/FL/Miami.json",
+      success: function(data) {
+        testingTesting = data;
+        addToThreeDay(data.forecast);
+        var current = data.current_observation;
+        setRightNow(current);
+        showCurrent();
+      }
+    });
+}
 
-var threeDayForecast = [];
+//Uncomment below to get data from API
+//getWeather();
 
-/*
-currently commented out, uncomment to run properly
-
-$.ajax({
-	  type: 'GET',
-	  url: "http://api.wunderground.com/api/" + private.key + "/forecast/q/MA/Boston.json",
-	  success: function(data) {
-	    console.log("Got data");
-	   	//current_Boston = data;
-      console.log(data.forecast.simpleforecast);
-      var simpleForcast = data.forecast.simpleforecast;
-
-      //today
-      threeDayForecast.push(simpleForcast.forecastday[0]);
-      //Day 1
-      threeDayForecast.push(simpleForcast.forecastday[1]);
-
-      //Day 2
-      threeDayForecast.push(simpleForcast.forecastday[2]);
-
-      //Day 3
-      threeDayForecast.push(simpleForcast.forecastday[3]);
-	  }
-	});
-*/
-
-/*Able to combine 
-key/conditions/forecast/q/CA/San_Francisco.json
+function addToThreeDay(data){
+  var simpleForecast = data.simpleforecast.forecastday;
+  simpleForecast.forEach(function(val){
+    data.threeDayForecast.push(val);
+  });
+}
 
 function addDivs(days){
   $("#current").hide();
@@ -119,8 +150,8 @@ function fillWeatherContent(day, suffix){
 }
 
 function renderThreeDay(){
-  addDivs(threeDayForecast);
-  for (var i = 0; i < threeDayForecast.length; i++){
+  addDivs(data.threeDayForecast);
+  for (var i = 0; i < data.threeDayForecast.length; i++){
     addWeatherTags("#day" + i, i);
     fillWeatherContent(threeDayForecast[i], i);
   }
