@@ -1,10 +1,18 @@
 * {
 	
 	box-sizing: border-box;
+
 }
 
+h2{
+	margin-top: 20px;
+}
+
+
 .grid{
+	font-family: 'Source Sans Pro', sans-serif;
 	width: 100%;
+	margin:0 auto;
 	display: flex;
 	flex-wrap: wrap;
 }
@@ -18,23 +26,81 @@
 
 #threeDayGrid{
 	width: 100%;
-		display: flex;
+	display: flex;
 	flex-wrap: wrap;
+	margin-top: 20px;
+	background: white;
+
 
 }
 
 .threeDay{
-	border: 1px solid black;
+	border-left: 3px solid #6F6F6F;
 	width: 25%;
-	height: 400px;
+	
+	padding-left: 10px
+
 }
 #credit{
 	margin-top: 35px;
 	margin:0 auto;
-	width: 100%;
+	
 }
 
 #logo{
-	width:100%;
+	width:25%;
+	float:right;
+	background:white;
+	padding: 5px;
+	height: 100%;
+}
+
+
+
+/*border-left: 3px solid black;*/
+/*padding-left: 10px;*/
+
+header{
+	height: 100%;
+	font-size: 4em;
+	color: white;
+	/*background: rgba(0, 0, 0, 0.84);*/
+	background: #183C4E;
+	margin: 0;
+	padding: 15px;
+	
+}
+
+h1{
+	display: inline;
+}
+
+#buttons{
+	display: inline;
+	float: right;
+}
+
+nav{
+	font-family: 'Source Sans Pro', sans-serif;
+	width: 100%;
+	color: white;
+	padding: 10px 0;
+	/*background: rgba(0, 0, 0, 0.51);*/
+	background: #2F9458;
+	
+}
+
+.container{
+	width: 750px;
+	margin:0 auto;
+}
+
+#current{
+	margin:0 auto;
+	text-align: center;
+}
+
+body{
+	background: rgb(156, 209, 255)
 }
 

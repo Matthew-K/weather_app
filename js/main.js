@@ -49,7 +49,7 @@ var controller = {
 
   //Runs when program first started. API will get called/data updated, view will get rendered, and button click handlers will be created
   init: function(){
-    controller.getWeatherInfo();
+    //controller.getWeatherInfo();
     view.init();
     buttons.init();
   },
@@ -113,7 +113,8 @@ var view = {
   //Runs when program is first initialized
   init: function(){
     $(document).ajaxStop(function () {
-      view.renderCurrent(controller.getCurrentWeather());
+      //view.renderCurrent(controller.getCurrentWeather());
+      view.renderCurrent(example_conditions);
     });
   },
 
@@ -155,7 +156,7 @@ var view = {
   Index corresponds to the index in the threeDay array. It will be used as a suffix for all the ids created by this function
   */
   addWeatherTags: function(selector, index){
-    $(selector).append("<p id =weekday" + index +"></p>");
+    $(selector).append("<h3 id =weekday" + index +"></h3>");
     $(selector).append("<p id =highTemp" + index +"></p>");
     $(selector).append("<p id =lowTemp" + index +"></p>");
     $(selector).append("<p id =weather" + index +"></p>");
@@ -192,7 +193,10 @@ buttons = {
     $("#test").on("click", function(){  
       $("#current").hide();
       if( $('#threeDayGrid').is(':empty') ) {
-        view.renderthreeDayForecast(controller.getThreeDayForecast());
+        //view.renderthreeDayForecast(controller.getThreeDayForecast());
+
+        //example used below to avoid ajax calls when working on styles
+        view.renderthreeDayForecast(example_forecast.forecast.simpleforecast.forecastday);
       }
       $("#threeDayGrid").show();
     });
