@@ -9,7 +9,6 @@ var data = {
     feelsLike: null,
     conditions: null,
     icon: null,
-    precipChance: null,
     humidity: null,
     wind: null
   },
@@ -18,7 +17,7 @@ var data = {
 
   threeDay: [/*today, tomorrow, day2, day3*/]
 
-  /*Each object inside threeDay will have the following info. Note: The following only shows the key/value pairs that will or might be used in displaying the three day forecast. There are more key/value pairs received from the API call that each object will have.
+  /*Each object inside threeDay will have the following info. Note: The following only shows the key/value pairs that will or might be used in displaying the three day forecast.
 
     "date": {
     "day": 26,
@@ -126,7 +125,6 @@ var view = {
     $("#feelsLike").text(currentWeather.feelsLike);
     $("#weather").text(currentWeather.conditions);
     $("#weather_icon").attr("src", currentWeather.icon);
-    $("#precip").text("Precipitation: " + currentWeather.precipChance + " %");
     $("#humidity").text("Humidity: " + currentWeather.humidity);
     $("#wind").text("Wind: " + currentWeather.wind);
   },
