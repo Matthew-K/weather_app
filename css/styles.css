@@ -16,7 +16,7 @@
 	height: 400px;
 }
 
-#threeDayTest{
+#threeDayGrid{
 	width: 100%;
 		display: flex;
 	flex-wrap: wrap;
