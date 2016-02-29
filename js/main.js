@@ -169,7 +169,7 @@ var view = {
     if(index === 0){
       $("#weekday"+ index).text("Today " + day.date.month + '/' + day.date.day);
     }else{
-      $("#weekday"+ index).text(day.date.weekday + ' ' + day.date.month + '/' + day.date.day);
+      $("#weekday"+ index).text(day.date.weekday_short + ' ' + day.date.month + '/' + day.date.day);
     }
     $("#highTemp"+ index).text("High: " + day.high.fahrenheit +" F");
     $("#lowTemp"+ index).text("Low: " + day.low.fahrenheit + " F");
@@ -183,6 +183,8 @@ buttons = {
   //Creates Current button click handler
   createCurrentClick: function(){
     $("#currentButton").on("click", function(){
+      $("#threeDayButton").removeClass("active");
+      $(this).addClass("active");
       $("#current").show();
       $("#threeDayGrid").hide();
     });
@@ -190,8 +192,10 @@ buttons = {
 
   //Creates Three Day Forecast button click handler 
   createThreeDayClick: function(){
-    $("#test").on("click", function(){  
+    $("#threeDayButton").on("click", function(){  
       $("#current").hide();
+      $("#currentButton").removeClass("active");
+      $(this).addClass("active");
       if( $('#threeDayGrid').is(':empty') ) {
         //view.renderthreeDayForecast(controller.getThreeDayForecast());
 

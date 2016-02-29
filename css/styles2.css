@@ -1,0 +1,101 @@
+* { Box-sizing: Border-box } 
+
+
+body{
+	background: rgb(156, 209, 255);
+	font-family: 'Source Sans Pro', sans-serif;
+	color: #2F2F2F;
+    margin: 0;
+}
+
+header{
+	height: 100%;
+	font-family: "Times New Roman", Times, serif;
+	font-size: 4em;
+	color: white;
+	background: #183C4E;
+	margin: 0;
+	padding: 15px 0;
+}
+
+#logo{
+	width:100%;
+	float:right;
+	background:white;
+	padding: 5px;
+	height: 100%;
+}
+
+nav{
+	height: 100%;
+	font-size: 1em;
+	color: white;
+	background: #183C4E;
+	margin: 0;
+	background: #2F9458;
+}
+
+#current{
+	margin:0 auto;
+	text-align: center;
+	background: white;
+	max-width: 350px;
+}
+
+#threeDayGrid{
+	
+	display: flex;
+	flex-wrap: wrap;
+	background: white;
+	margin-top: 20px;
+}
+
+.threeDay{
+	border-left: 3px solid #6F6F6F;
+	width: 25%;
+	padding-left: 10px
+}
+
+.container{
+	max-width: 750px;
+	margin:0 auto;
+}
+
+.row {
+    width: 100%;
+    display: flex;
+	flex-wrap: wrap;
+}
+
+.col-6{
+	width: 50%;
+}
+
+h1{
+	margin:12px 0;
+	font-weight: normal;
+}
+
+button{
+	height: 55px;
+	border: 0;
+	font-family: 'Source Sans Pro', sans-serif;
+	font-size: 1em;
+	display:inline-block;
+	float: right;
+	color:white;
+	background: #2F9458;
+}
+
+button:hover{
+	background:#28804B;
+}
+
+button:focus {
+	outline:0;
+	background: #28804B;
+}
+
+.active{
+	background: #28804B;
+}

@@ -1,16 +1,14 @@
-* {
-	
-	box-sizing: border-box;
-
-}
+ 
 
 h2{
 	margin-top: 20px;
 }
 
+body{
+	font-family: 'Source Sans Pro', sans-serif;
+}
 
 .grid{
-	font-family: 'Source Sans Pro', sans-serif;
 	width: 100%;
 	margin:0 auto;
 	display: flex;
@@ -30,17 +28,14 @@ h2{
 	flex-wrap: wrap;
 	margin-top: 20px;
 	background: white;
-
-
 }
 
 .threeDay{
-	border-left: 3px solid #6F6F6F;
+	border: 3px solid #6F6F6F;
 	width: 25%;
-	
 	padding-left: 10px
-
 }
+
 #credit{
 	margin-top: 35px;
 	margin:0 auto;
@@ -56,19 +51,14 @@ h2{
 }
 
 
-
-/*border-left: 3px solid black;*/
-/*padding-left: 10px;*/
-
 header{
 	height: 100%;
+	font-family: "Times New Roman", Times, serif;
 	font-size: 4em;
 	color: white;
-	/*background: rgba(0, 0, 0, 0.84);*/
 	background: #183C4E;
 	margin: 0;
 	padding: 15px;
-	
 }
 
 h1{
@@ -80,27 +70,27 @@ h1{
 	float: right;
 }
 
-nav{
-	font-family: 'Source Sans Pro', sans-serif;
-	width: 100%;
-	color: white;
-	padding: 10px 0;
-	/*background: rgba(0, 0, 0, 0.51);*/
-	background: #2F9458;
-	
-}
-
+*/
 .container{
 	width: 750px;
 	margin:0 auto;
 }
 
-#current{
-	margin:0 auto;
-	text-align: center;
+
+.navbar-default{
+	background: #2F9458;
 }
 
-body{
-	background: rgb(156, 209, 255)
+
+
+.navbar-default .navbar-brand {
+	color: white;
 }
 
+.navbar-default .navbar-toggle .icon-bar {
+	background-color: white;
+}
+
+.navbar-default .navbar-nav>li>a {
+	color: white;
+}

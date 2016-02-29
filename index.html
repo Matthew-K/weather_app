@@ -4,33 +4,27 @@
 	<meta charset="UTF-8">
 	<title>Weather_App</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- <link rel="stylesheet" type="text/css" href="bootstrap-3.3.6-dist/css/bootstrap.min.css"> -->
+	<link rel="stylesheet" type="text/css" href="css/styles2.css"> 
 	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
 <body>
 
-
 <header>
-	<div class="container">Weather App
-	
-	<img id="logo" src=https://icons.wxug.com/logos/JPG/wundergroundLogo_4c_horz.jpg>
+	<div class="container">
+		Weather App
 	</div>
 </header>
 
 
-<nav>
-	<div class="container">
-	<h1>City</h1>
-	<div id="buttons">
-		<button id="currentButton">Current</button>
-		<button id="test">Three Day Forecast</button>
+<nav class="navbar">
+	<div class="container row">
+	      <div class="col-6"><h1>Placeholder City, Massachusetts</h1></div>
+	      <div class="col-6">
+	      <button id="threeDayButton">Three Day Forecast</button>
+	      <button id="currentButton" class="active">Current Weather</button>
 	</div>
-	</div>	
 </nav>
-
-
-
-
 
 
 
@@ -50,17 +44,19 @@
 </div>
 
 
-<!--
+
 <div id="credit" class="container">
 	<h3>Weather data, examples and icons from</h3>
 	<img id="logo" src=https://icons.wxug.com/logos/JPG/wundergroundLogo_4c_horz.jpg>
 </div>
--->
+
+
 
 
 <script type="text/javascript" src="../wunderground_key.js"></script>
 <script type="text/javascript" src="js/example.js"></script>
 <script type="text/javascript" src="js/jquery-2.2.1.min.js"></script>	
 <script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" src="bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
 </body>
 </html>
