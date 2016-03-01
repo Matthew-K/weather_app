@@ -40,6 +40,13 @@ nav{
 	text-align: center;
 	background: white;
 	max-width: 350px;
+	height: 350px;
+	padding-top: 5px;
+	margin-top: 20px;
+	-webkit-box-shadow: 0px 9px 30px -8px rgba(0,0,0,0.75);
+	-moz-box-shadow: 0px 9px 30px -8px rgba(0,0,0,0.75);
+	box-shadow: 0px 9px 30px -8px rgba(0,0,0,0.75);
+
 }
 
 #threeDayGrid{
@@ -48,6 +55,9 @@ nav{
 	flex-wrap: wrap;
 	background: white;
 	margin-top: 20px;
+	-webkit-box-shadow: 0px 9px 30px -8px rgba(0,0,0,0.75);
+	-moz-box-shadow: 0px 9px 30px -8px rgba(0,0,0,0.75);
+	box-shadow: 0px 9px 30px -8px rgba(0,0,0,0.75);
 }
 
 .threeDay{
@@ -88,14 +98,21 @@ button{
 }
 
 button:hover{
-	background:#28804B;
+	background: #123A22;
+	color: #DEDEDE;
+
 }
 
 button:focus {
 	outline:0;
-	background: #28804B;
+	background: #1F6139;
 }
 
 .active{
-	background: #28804B;
+	background:#1F6139;
+}
+
+button:active{
+	border-bottom: 3px solid #123A22;
+
 }
