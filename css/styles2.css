@@ -1,5 +1,6 @@
-* {box-sizing: border-box } 
-
+* {
+	box-sizing: border-box 
+} 
 
 body{
 	background: rgb(156, 209, 255);
@@ -18,14 +19,6 @@ header{
 	padding: 15px 0;
 }
 
-#logo{
-	width:100%;
-	float:right;
-	background:white;
-	padding: 5px;
-	height: 100%;
-}
-
 nav{
 	height: 100%;
 	font-size: 1em;
@@ -34,38 +27,6 @@ nav{
 	margin: 0;
 	background: #2F9458;
 }
-
-#current{
-	margin:0 auto;
-	text-align: center;
-	background: white;
-	max-width: 350px;
-	height: 350px;
-	padding-top: 5px;
-	margin-top: 20px;
-	-webkit-box-shadow: 0px 9px 30px -8px rgba(0,0,0,0.75);
-	-moz-box-shadow: 0px 9px 30px -8px rgba(0,0,0,0.75);
-	box-shadow: 0px 9px 30px -8px rgba(0,0,0,0.75);
-}
-
-#threeDayGrid{
-	background: white;
-	margin-top: 20px;
-	-webkit-box-shadow: 0px 9px 30px -8px rgba(0,0,0,0.75);
-	-moz-box-shadow: 0px 9px 30px -8px rgba(0,0,0,0.75);
-	box-shadow: 0px 9px 30px -8px rgba(0,0,0,0.75);
-}
-
-.threeDay{
-	border-left: 3px solid #8C8C8C;
-	width: 25%;
-	padding-left: 10px
-}
-
-.threeDay:first-child{
-	border-left: 0;
-}
-
 
 .container{
 	max-width: 750px;
@@ -126,8 +87,71 @@ button:active{
 	flex-wrap: wrap;
 }
 
+#current{
+	margin:0 auto;
+	text-align: center;
+	background: white;
+	max-width: 350px;
+	height: 350px;
+	padding-top: 5px;
+	margin-top: 20px;
+	-webkit-box-shadow: 0px 9px 30px -8px rgba(0,0,0,0.75);
+	-moz-box-shadow: 0px 9px 30px -8px rgba(0,0,0,0.75);
+	box-shadow: 0px 9px 30px -8px rgba(0,0,0,0.75);
+}
+
+#threeDayGrid{
+	background: white;
+	margin-top: 20px;
+	-webkit-box-shadow: 0px 9px 30px -8px rgba(0,0,0,0.75);
+	-moz-box-shadow: 0px 9px 30px -8px rgba(0,0,0,0.75);
+	box-shadow: 0px 9px 30px -8px rgba(0,0,0,0.75);
+}
+
+.threeDay{
+	border-left: 3px solid #8C8C8C;
+	width: 25%;
+	padding-left: 10px
+}
+
+.threeDay:first-child{
+	border-left: 0;
+}
+
+#threeDayHeader{
+	display: none;
+	font-weight: bold;
+	margin-top: 45px;
+}
+
+#logo{
+	width:100%;
+	float:right;
+	background:white;
+	padding: 5px;
+	height: 100%;
+}
+
+
+/*Media Queries*/
+
+@media (max-width: 770px) {
+	header, nav {
+		padding-left: 15px;
+		padding-right: 15px;
+	}
+
+	#threeDayGrid{
+		margin-right:15px;
+		margin-left: 15px;
+	}
+}
+
+
 @media (max-width: 450px) {
-	* {text-align: center } 
+	* {
+		text-align: center 
+	} 
 
 	#buttons {
 		display: none;
@@ -139,7 +163,7 @@ button:active{
 
 	#current{
 		display: block;
-		max-width: 100%
+		max-width: 100%;
 	}
 	
 	#threeDayGrid{
@@ -158,16 +182,8 @@ button:active{
 	.threeDay:first-child{
 		border-top: 0;
 	}
-}
 
-@media (max-width: 770px) {
-	header, nav {
-		padding-left: 15px;
-		padding-right: 15px;
-	}
-
-	#threeDayGrid{
-		margin-right:15px;
-		margin-left: 15px;
+	#threeDayHeader{
+		display: block;
 	}
 }

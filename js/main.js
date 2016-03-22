@@ -128,7 +128,7 @@ var view = {
   //Renders current weather 
   renderCurrent: function(currentWeather){
     $("h1").text(currentWeather.location);
-    $("h2").text("Today");
+    $("h2:first").text("Today");
     $("#temp").text(currentWeather.temp);
     $("#feelsLike").text(currentWeather.feelsLike);
     $("#weather").text(currentWeather.conditions);
