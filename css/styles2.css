@@ -126,3 +126,48 @@ button:active{
 	flex-wrap: wrap;
 }
 
+@media (max-width: 450px) {
+	* {text-align: center } 
+
+	#buttons {
+		display: none;
+	}
+
+	#city{
+		width: 100%;
+	}
+
+	#current{
+		display: block;
+		max-width: 100%
+	}
+	
+	#threeDayGrid{
+		display: block;
+		margin-top:15px;
+	}
+
+	.threeDay{
+		border-left: 0;
+		border-top: 3px solid #8C8C8C;
+		width: 100%;
+		padding-left: 0;
+		padding-top: 1px;
+	}
+
+	.threeDay:first-child{
+		border-top: 0;
+	}
+}
+
+@media (max-width: 770px) {
+	header, nav {
+		padding-left: 15px;
+		padding-right: 15px;
+	}
+
+	#threeDayGrid{
+		margin-right:15px;
+		margin-left: 15px;
+	}
+}
