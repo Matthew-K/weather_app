@@ -111,11 +111,20 @@ var controller = {
 var view = {
 
   //Runs when program is first initialized
-  init: function(){
+/*  init: function(){
     $(document).ajaxStop(function () {
       //view.renderCurrent(controller.getCurrentWeather());
       view.renderCurrent(example_conditions);
+      //view.renderthreeDayForecast(example_forecast.forecast.simpleforecast.forecastday);
     });
+  },*/
+
+// BELOW INIT IS FOR EXAMPLE
+  init: function(){
+    view.renderCurrent(example_conditions);
+    view.renderthreeDayForecast(example_forecast.forecast.simpleforecast.forecastday);
+    //$("#threeDayGrid").css("display", "none");
+
   },
 
   //Renders current weather 
@@ -196,12 +205,6 @@ buttons = {
       $("#current").hide();
       $("#currentButton").removeClass("active");
       $(this).addClass("active");
-      if( $('#threeDayGrid').is(':empty') ) {
-        //view.renderthreeDayForecast(controller.getThreeDayForecast());
-
-        //example used below to avoid ajax calls when working on styles
-        view.renderthreeDayForecast(example_forecast.forecast.simpleforecast.forecastday);
-      }
       $("#threeDayGrid").show();
     });
   },
@@ -214,9 +217,5 @@ buttons = {
 };
 
 controller.init();
-
-
-
-
 
 

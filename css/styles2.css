@@ -50,7 +50,6 @@ nav{
 }
 
 #threeDayGrid{
-	
 	display: flex;
 	flex-wrap: wrap;
 	background: white;
@@ -116,3 +115,4 @@ button:active{
 	border-bottom: 3px solid #123A22;
 
 }
+
