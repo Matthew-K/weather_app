@@ -124,7 +124,7 @@ var view = {
     view.renderCurrent(example_conditions);
     view.renderthreeDayForecast(example_forecast.forecast.simpleforecast.forecastday);
     //$("#threeDayGrid").css("display", "none");
-
+    $("#threeDayGrid").addClass("hide");
   },
 
   //Renders current weather 
