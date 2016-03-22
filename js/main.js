@@ -193,7 +193,7 @@ buttons = {
       $("#threeDayButton").removeClass("active");
       $(this).addClass("active");
       $("#current").removeClass("hide");
-      $("#threeDayGrid").toggleClass("flex hide");
+      $("#threeDayGrid").removeClass("flex").addClass("hide");
     });
   },
 
@@ -203,7 +203,7 @@ buttons = {
       $("#current").addClass("hide");
       $("#currentButton").removeClass("active");
       $(this).addClass("active");
-      $("#threeDayGrid").toggleClass("hide flex");
+      $("#threeDayGrid").removeClass("hide").addClass("flex");
     });
   },
 
