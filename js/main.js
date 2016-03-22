@@ -123,8 +123,6 @@ var view = {
   init: function(){
     view.renderCurrent(example_conditions);
     view.renderthreeDayForecast(example_forecast.forecast.simpleforecast.forecastday);
-    //$("#threeDayGrid").css("display", "none");
-    $("#threeDayGrid").addClass("hide");
   },
 
   //Renders current weather 
@@ -194,18 +192,18 @@ buttons = {
     $("#currentButton").on("click", function(){
       $("#threeDayButton").removeClass("active");
       $(this).addClass("active");
-      $("#current").show();
-      $("#threeDayGrid").hide();
+      $("#current").removeClass("hide");
+      $("#threeDayGrid").toggleClass("flex hide");
     });
   },
 
   //Creates Three Day Forecast button click handler 
   createThreeDayClick: function(){
     $("#threeDayButton").on("click", function(){  
-      $("#current").hide();
+      $("#current").addClass("hide");
       $("#currentButton").removeClass("active");
       $(this).addClass("active");
-      $("#threeDayGrid").show();
+      $("#threeDayGrid").toggleClass("hide flex");
     });
   },
 
