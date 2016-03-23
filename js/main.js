@@ -111,17 +111,17 @@ var controller = {
 var view = {
 
   //Runs when program is first initialized
-/*  init: function(){
+/* init: function(){
     $(document).ajaxStop(function () {
-      //view.renderCurrent(controller.getCurrentWeather());
-      view.renderCurrent(example_conditions);
-      //view.renderthreeDayForecast(example_forecast.forecast.simpleforecast.forecastday);
+      view.renderCurrent(controller.getCurrentWeather());
+      view.renderthreeDayForecast(controller.getThreeDayForecast());
     });
   },*/
 
-// BELOW INIT IS FOR EXAMPLE
+// Below init is for testing purposes when you do not want to run the API.
   init: function(){
-    view.renderCurrent(example_conditions);
+    controller.setCurrent(example_conditions.current_observation);
+    view.renderCurrent(data.current);
     view.renderthreeDayForecast(example_forecast.forecast.simpleforecast.forecastday);
   },
 
