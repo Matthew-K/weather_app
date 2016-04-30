@@ -4,12 +4,10 @@
 	<meta charset="UTF-8">
 	<title>Weather_App</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!-- <link rel="stylesheet" type="text/css" href="bootstrap-3.3.6-dist/css/bootstrap.min.css"> -->
-	<link rel="stylesheet" type="text/css" href="css/styles2.css"> 
+	<link rel="stylesheet" type="text/css" href="css/styles.css"> 
 	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet' type='text/css'>
 </head>
 <body>
-
 
 <header>
 	<div class="container">
@@ -19,15 +17,15 @@
 
 <nav class="navbar">
 	<div class="container row">
-	      <div id="city" class="col-6"><h1>Placeholder City, Massachusetts</h1></div>
-	      <div id="buttons" class="col-6">
-	      <button id="threeDayButton">Three Day Forecast</button>
-	      <button id="currentButton" class="active">Current Weather</button>
+		<div id="city" class="col-6"><h1>Placeholder City, Massachusetts</h1></div>
+    	<div id="buttons" class="col-6">
+    		<button id="threeDayButton">Three Day Forecast</button>
+      		<button id="currentButton" class="active">Current Weather</button>
+		</div>
 	</div>
 </nav>
 
 <div class="container">
-<div class="grid">
 	<div id="current">
 		<h2>Date</h2>
 		<h3><span id="temp">Number</span> F</h3>
@@ -37,20 +35,19 @@
 		<p id="humidity">Number%</p>
 		<p><span id="wind">Number</span> mph</p>
 	</div>
+	<!-- This header is only displayed on screen < 450px -->
 	<div id="threeDayHeader">
 		<h2>Three Day Forecast</h2>
 	</div>
 	<div id="threeDayGrid" class="hide"></div>
+	<div id="credit" class="container">
+		<h3>Weather data, examples and icons from</h3>
+		<img id="logo" src=https://icons.wxug.com/logos/JPG/wundergroundLogo_4c_horz.jpg>
+	</div>
 </div>
-</div>
-
-<div id="credit" class="container">
-	<h3>Weather data, examples and icons from</h3>
-	<img id="logo" src=https://icons.wxug.com/logos/JPG/wundergroundLogo_4c_horz.jpg>
-</div>
-
 
 <script type="text/javascript" src="../wunderground_key.js"></script>
+<!-- example.js is for testing purposes. Once the app is launched, the script can be commented out -->
 <script type="text/javascript" src="js/example.js"></script>
 <script type="text/javascript" src="js/jquery-2.2.1.min.js"></script>	
 <script type="text/javascript" src="js/main.js"></script>

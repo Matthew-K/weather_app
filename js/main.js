@@ -82,10 +82,9 @@ var controller = {
         type: 'GET',
         url: "http://api.wunderground.com/api/" + private.key + "/forecast/conditions/q/MA/Boston.json",
         success: function(info) {
-          console.log("----------------------------");
-          console.log("   Data from API received   ");
-          console.log("----------------------------");
-          testingTesting = info;
+          // console.log("----------------------------");
+          // console.log("   Data from API received   ");
+          // console.log("----------------------------");
           controller.setCurrent(info.current_observation);
           controller.setthreeDay(info.forecast);    
         }
@@ -118,7 +117,7 @@ var view = {
     });
   },*/
 
-// Below init is for testing purposes when you do not want to run the API.
+// Below init is for testing purposes when you do not want to run the API. If you wish to test, uncomment the below and comment out the above init function and vice versa when wanting to use the API. 
   init: function(){
     controller.setCurrent(example_conditions.current_observation);
     view.renderCurrent(data.current);
@@ -146,7 +145,7 @@ var view = {
     }
   },
 
-  /*Creates four divs in order to show the three day forecast properly (a seperate div for today(id="day0"), tomorrow(id="day1"), day 2(id="day2"), and day 3(id="day3"))*/
+  /*Creates four divs each with a class of .threeDay in order to show the three day forecast properly (a seperate div for today(id="day0"), tomorrow(id="day1"), day 2(id="day2"), and day 3(id="day3"))*/
   createThreeDayDivs: function(days){
     for (var i = 0; i < days.length; i++){
         newDiv = document.createElement("div");
@@ -159,8 +158,7 @@ var view = {
 
   When entering the selector enter as you would when choosing a selector using jQuery. For instance, if the selector you want to has an id named day0, use "#day0" as the selector parameter. 
 
- 
-  Index corresponds to the index in the threeDay array. It will be used as a suffix for all the ids created by this function
+  Index corresponds to the index in data.threeDay. It will be used as a suffix for all the ids created by this function.
   */
   addWeatherTags: function(selector, index){
     $(selector).append("<h3 id =weekday" + index +"></h3>");
@@ -170,8 +168,7 @@ var view = {
     $(selector).append("<img id =icon" + index +">");
   },
 
-  
-  /*fillWeatherContent is closely related to addWeatherTags. Enter the same index used for that function in this one to fill in the proper information inside the html tags*/
+  /*fillWeatherContent is closely related to addWeatherTags. Enter the same index used for that function in this one to fill in the proper information inside the html tags in each div*/
   fillWeatherContent: function(day, index){
     if(index === 0){
       $("#weekday"+ index).text("Today " + day.date.month + '/' + day.date.day);
