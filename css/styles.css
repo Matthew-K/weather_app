@@ -137,6 +137,12 @@ button:active{
 	height: 100%;
 }
 
+#error{
+	font-weight: bold;
+	color: red;
+	text-align: center;
+}
+
 
 /*Media Queries*/
 

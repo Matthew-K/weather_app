@@ -49,7 +49,7 @@ var controller = {
 
   //Runs when program first started. API will get called/data updated, view will get rendered, and button click handlers will be created
   init: function(){
-    //controller.getWeatherInfo();
+    controller.getWeatherInfo();
     view.init();
     buttons.init();
   },
@@ -80,13 +80,22 @@ var controller = {
   getWeatherInfo: function(){
     $.ajax({
         type: 'GET',
-        url: "http://api.wunderground.com/api/" + private.key + "/forecast/conditions/q/MA/Boston.json",
+        // If you wish to make changes to the app without calling the API each time you refresh the browser, uncomment the url key with the empty string value below and comment out the url key with the actual url value below that.
+        // url: "",
+        url: "http://api.wunderground.com/api/b857cdba14540849/forecast/geolookup/conditions/q/autoip.json?",
         success: function(info) {
           // console.log("----------------------------");
           // console.log("   Data from API received   ");
           // console.log("----------------------------");
           controller.setCurrent(info.current_observation);
           controller.setthreeDay(info.forecast);    
+        },
+        error: function(){
+          $( "<p id='error'>There was an error with the API call. Here is an example that simulates the call.<p>" ).insertBefore("#current" );
+          //example_conditions and example_forecast are from the file example.js
+          controller.setCurrent(example_conditions.current_observation);
+          view.renderCurrent(data.current);
+          view.renderthreeDayForecast(example_forecast.forecast.simpleforecast.forecastday);
         }
       });
   },
@@ -110,18 +119,11 @@ var controller = {
 var view = {
 
   //Runs when program is first initialized
-/* init: function(){
+ init: function(){
     $(document).ajaxStop(function () {
       view.renderCurrent(controller.getCurrentWeather());
       view.renderthreeDayForecast(controller.getThreeDayForecast());
     });
-  },*/
-
-// Below init is for testing purposes when you do not want to run the API. If you wish to test, uncomment the below and comment out the above init function and vice versa when wanting to use the API. 
-  init: function(){
-    controller.setCurrent(example_conditions.current_observation);
-    view.renderCurrent(data.current);
-    view.renderthreeDayForecast(example_forecast.forecast.simpleforecast.forecastday);
   },
 
   //Renders current weather 
@@ -211,6 +213,7 @@ buttons = {
   }
 };
 
+//Initializes app
 controller.init();
 
 
