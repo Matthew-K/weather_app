@@ -229,11 +229,6 @@ buttons = {
 };
 
 
-// // media query
-// if($(window).width() < 451){
-//   $('#FCDiv').insertAfter('#current');
-// }
-
 //Initializes app
 controller.init();
 

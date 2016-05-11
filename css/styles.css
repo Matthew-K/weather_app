@@ -31,9 +31,11 @@ nav{
 .container{
 	max-width: 750px;
 	margin:0 auto;
+	display: flex;
+	flex-wrap: wrap;
 }
 
-.row {
+.navBar {
     width: 100%;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -52,7 +54,7 @@ h1{
 	font-weight: normal;
 }
 
-button{
+.navButton{
 	height: 55px;
 	border: 0;
 	font-family: 'Source Sans Pro', sans-serif;
@@ -63,13 +65,13 @@ button{
 	background: #2F9458;
 }
 
-button:hover{
+.navButton:hover{
 	background: #123A22;
 	color: #DEDEDE;
 	cursor: pointer;
 }
 
-button:focus {
+.navButton:focus {
 	outline:0;
 	background: #1F6139;
 }
@@ -78,7 +80,7 @@ button:focus {
 	background:#1F6139;
 }
 
-button:active{
+.navButton:active{
 	border-bottom: 3px solid #123A22;
 }
 
@@ -99,15 +101,19 @@ button:active{
 	margin:0 auto;
 	text-align: center;
 	background: white;
-	max-width: 350px;
+	width: 350px;
 	height: 350px;
 	padding-top: 5px;
 	margin-top: 20px;
 	box-shadow: 0px 9px 30px -8px rgba(0,0,0,0.75);
+}
 
+#FCDiv{
+	width: 100%;
 }
 
 #threeDayGrid{
+	width: 100%;
 	background: white;
 	margin-top: 20px;
 	box-shadow: 0px 9px 30px -8px rgba(0,0,0,0.75);
@@ -126,6 +132,10 @@ button:active{
 #threeDayHeader{
 	display: none;
 	font-weight: bold;
+}
+
+#threeDayHeader h2{
+	margin-bottom: 0;
 }
 
 #FCToggle{
@@ -167,9 +177,9 @@ button:active{
 @media (max-width: 450px) {
 	* {
 		text-align: center 
-	} 
-
-	#buttons {
+	}
+	
+	#navButtons {
 		display: none;
 	}
 
@@ -180,11 +190,28 @@ button:active{
 	#current{
 		display: block;
 		max-width: 100%;
+		order: 0;
+	}
+
+	#FCDiv{
+		order: 1;
+	}
+
+	#FCToggle{
+		margin-top: 25px;
+		margin-bottom: 5px;
+	}
+	
+	#threeDayHeader{
+		display: block;
+		margin: 0 auto;
+		order: 2;
 	}
 	
 	#threeDayGrid{
 		display: block;
-		margin-top:15px;
+		margin-top: 15px;
+		order: 3;
 	}
 
 	.threeDay{
@@ -199,7 +226,4 @@ button:active{
 		border-top: 0;
 	}
 
-	#threeDayHeader{
-		display: block;
-	}
 }
