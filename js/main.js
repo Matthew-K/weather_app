@@ -6,6 +6,7 @@ var data = {
   current: {
     location: null,
     temp: null,
+    tempC: null,
     feelsLike: null,
     conditions: null,
     icon: null,
@@ -59,6 +60,7 @@ var controller = {
     data.current = {
       location: currentInfo.display_location.full,
       temp: currentInfo.temp_f,
+      tempC: currentInfo.temp_c,
       feelsLike: currentInfo.feelslike_f,
       conditions: currentInfo.weather,
       icon: currentInfo.icon_url,
@@ -81,8 +83,8 @@ var controller = {
     $.ajax({
         type: 'GET',
         // If you wish to make changes to the app without calling the API each time you refresh the browser, uncomment the url key with the empty string value below and comment out the url key with the actual url value below that.
-        // url: "",
-        url: "http://api.wunderground.com/api/b857cdba14540849/forecast/geolookup/conditions/q/autoip.json?",
+        url: "",
+        // url: "http://api.wunderground.com/api/b857cdba14540849/forecast/geolookup/conditions/q/autoip.json?",
         success: function(info) {
           // console.log("----------------------------");
           // console.log("   Data from API received   ");
@@ -130,8 +132,8 @@ var view = {
   renderCurrent: function(currentWeather){
     $("h1").text(currentWeather.location);
     $("h2:first").text("Today");
-    $("#temp").text(currentWeather.temp);
-    $("#feelsLike").text(currentWeather.feelsLike);
+    $("#temp").text(currentWeather.temp + ' F');
+    $("#feelsLike").text(currentWeather.feelsLike + ' F');
     $("#weather").text(currentWeather.conditions);
     $("#weather_icon").attr("src", currentWeather.icon);
     $("#humidity").text("Humidity: " + currentWeather.humidity);
@@ -161,6 +163,8 @@ var view = {
   When entering the selector enter as you would when choosing a selector using jQuery. For instance, if the selector you want to has an id named day0, use "#day0" as the selector parameter. 
 
   Index corresponds to the index in data.threeDay. It will be used as a suffix for all the ids created by this function.
+
+  The class "fahr" is also added to the necessary ids.
   */
   addWeatherTags: function(selector, index){
     $(selector).append("<h3 id =weekday" + index +"></h3>");
@@ -168,6 +172,10 @@ var view = {
     $(selector).append("<p id =lowTemp" + index +"></p>");
     $(selector).append("<p id =weather" + index +"></p>");
     $(selector).append("<img id =icon" + index +">");
+
+    // class "fahr" added to #highTemp and #lowTemp. Will be used when converting to celsius.
+    $("#highTemp"+ index).addClass("fahr");
+    $("#lowTemp"+ index).addClass("fahr");
   },
 
   /*fillWeatherContent is closely related to addWeatherTags. Enter the same index used for that function in this one to fill in the proper information inside the html tags in each div*/
@@ -206,12 +214,25 @@ buttons = {
     });
   },
 
+  createFCClick: function(){
+    $("#FCToggle").on("click", function(){
+      $(".fahr").text("Changing to C!");
+    });
+  },
+
   //Runs when program first initialized. Creates button click handlers
   init: function(){
     buttons.createCurrentClick();
     buttons.createThreeDayClick();
+    buttons.createFCClick();
   }
 };
+
+
+// // media query
+// if($(window).width() < 451){
+//   $('#FCDiv').insertAfter('#current');
+// }
 
 //Initializes app
 controller.init();

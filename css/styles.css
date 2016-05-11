@@ -126,7 +126,12 @@ button:active{
 #threeDayHeader{
 	display: none;
 	font-weight: bold;
-	margin-top: 45px;
+}
+
+#FCToggle{
+	display: block;
+	margin: 20px auto;
+	height: 30px;
 }
 
 #logo{
