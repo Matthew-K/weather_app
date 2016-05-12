@@ -84,9 +84,9 @@ var controller = {
   getWeatherInfo: function(){
     $.ajax({
         type: 'GET',
-        // If you wish to make changes to the app without calling the API each time you refresh the browser, uncomment the url key with the empty string value below and comment out the url key with the actual url value below that. Note: Currently the example three day forecast is not rendering properly when not calling API
-        // url: "",
-        url: "http://api.wunderground.com/api/b857cdba14540849/forecast/geolookup/conditions/q/autoip.json?",
+        // If you wish to make changes to the app without calling the API each time you refresh the browser, uncomment the url key with the empty string value below and comment out the url key with the actual url value below that.
+        url: "",
+        // url: "http://api.wunderground.com/api/b857cdba14540849/forecast/geolookup/conditions/q/autoip.json?",
         success: function(info) {
           // console.log("----------------------------");
           // console.log("   Data from API received   ");
@@ -98,10 +98,9 @@ var controller = {
           $( "<p id='error'>There was an error with the API call. Here is an example that simulates the call.<p>" ).insertBefore("#current" );
           //example_conditions and example_forecast are from the file example.js
           controller.setCurrent(example_conditions.current_observation);
-          // console.log(example_forecast.forecast.simpleforecast.forecastday);
-          // controller.setThreeDay(example_forecast.forecast.simpleforecast.forecastday);
-          view.renderCurrent(data.current);
-          // view.renderthreeDayForecast(example_forecast.forecast.simpleforecast.forecastday);
+          controller.setThreeDay(example_forecast.forecast);
+          view.renderCurrent(controller.getCurrentWeather());
+          view.renderthreeDayForecast(controller.getThreeDayForecast());
         }
       });
   },
