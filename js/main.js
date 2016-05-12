@@ -85,8 +85,8 @@ var controller = {
     $.ajax({
         type: 'GET',
         // If you wish to make changes to the app without calling the API each time you refresh the browser, uncomment the url key with the empty string value below and comment out the url key with the actual url value below that. Note: The convert button currently does not work when working with the example.
-        // url: "",
-        url: "http://api.wunderground.com/api/b857cdba14540849/forecast/geolookup/conditions/q/autoip.json?",
+        url: "",
+        // url: "http://api.wunderground.com/api/b857cdba14540849/forecast/geolookup/conditions/q/autoip.json?",
         success: function(info) {
           // console.log("----------------------------");
           // console.log("   Data from API received   ");
@@ -167,8 +167,6 @@ var view = {
   When entering the selector enter as you would when choosing a selector using jQuery. For instance, if the selector you want to has an id named day0, use "#day0" as the selector parameter. 
 
   Index corresponds to the index in data.threeDay. It will be used as a suffix for all the ids created by this function.
-
-  The class "fahr" is also added to the necessary ids.
   */
   addWeatherTags: function(selector, index){
     $(selector).append("<h3 id =weekday" + index +"></h3>");
@@ -176,10 +174,6 @@ var view = {
     $(selector).append("<p id =lowTemp" + index +"></p>");
     $(selector).append("<p id =weather" + index +"></p>");
     $(selector).append("<img id =icon" + index +">");
-
-    // class "fahr" added to #highTemp and #lowTemp. Will be used when converting to celsius.
-    $("#highTemp"+ index).addClass("fahr");
-    $("#lowTemp"+ index).addClass("fahr");
   },
 
   /*fillWeatherContent is closely related to addWeatherTags. Enter the same index used for that function in this one to fill in the proper information inside the html tags in each div*/
