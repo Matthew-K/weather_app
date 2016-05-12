@@ -73,7 +73,7 @@ var controller = {
   },
 
   //Takes three day forecast info from the API call and sets it in data.threeday
-  setthreeDay: function(info){
+  setThreeDay: function(info){
     var simpleForecast = info.simpleforecast.forecastday;
     simpleForecast.forEach(function(val){
       data.threeDay.push(val);
@@ -84,24 +84,24 @@ var controller = {
   getWeatherInfo: function(){
     $.ajax({
         type: 'GET',
-        // If you wish to make changes to the app without calling the API each time you refresh the browser, uncomment the url key with the empty string value below and comment out the url key with the actual url value below that. Note: The convert button currently does not work when working with the example.
-        url: "",
-        // url: "http://api.wunderground.com/api/b857cdba14540849/forecast/geolookup/conditions/q/autoip.json?",
+        // If you wish to make changes to the app without calling the API each time you refresh the browser, uncomment the url key with the empty string value below and comment out the url key with the actual url value below that. Note: Currently the example three day forecast is not rendering properly when not calling API
+        // url: "",
+        url: "http://api.wunderground.com/api/b857cdba14540849/forecast/geolookup/conditions/q/autoip.json?",
         success: function(info) {
           // console.log("----------------------------");
           // console.log("   Data from API received   ");
           // console.log("----------------------------");
           controller.setCurrent(info.current_observation);
-          controller.setthreeDay(info.forecast);    
+          controller.setThreeDay(info.forecast);    
         },
         error: function(){
           $( "<p id='error'>There was an error with the API call. Here is an example that simulates the call.<p>" ).insertBefore("#current" );
           //example_conditions and example_forecast are from the file example.js
           controller.setCurrent(example_conditions.current_observation);
           // console.log(example_forecast.forecast.simpleforecast.forecastday);
-          // controller.setthreeDay(example_forecast.forecast.simpleforecast.forecastday);
+          // controller.setThreeDay(example_forecast.forecast.simpleforecast.forecastday);
           view.renderCurrent(data.current);
-          view.renderthreeDayForecast(example_forecast.forecast.simpleforecast.forecastday);
+          // view.renderthreeDayForecast(example_forecast.forecast.simpleforecast.forecastday);
         }
       });
   },
@@ -149,7 +149,7 @@ var view = {
     view.createThreeDayDivs(threeDayForecast);
     for (var i = 0; i < threeDayForecast.length; i++){
       view.addWeatherTags(i);
-      view.fillWeatherContent(threeDayForecast[i], i);
+      view.fillWeatherContent(i);
     }
   },
 
@@ -171,20 +171,22 @@ var view = {
       .append("<img id =icon" + index +">");
   },
 
-  /*fillWeatherContent is closely related to addWeatherTags. Enter the same index used for that function in this one to fill in the proper information inside the html tags in each div*/
-  fillWeatherContent: function(day, index){
+  /*Puts appropriate weather info in specified div. Enter the same index used for addWeatherTags function to fill in the proper information inside the div*/
+  fillWeatherContent: function(index){
+    var forecast = controller.getThreeDayForecast();
+    var date = forecast[index];
     if(index === 0){
-      $("#weekday"+ index).text("Today " + day.date.month + '/' + day.date.day);
+      $("#weekday"+ index).text("Today " + date.date.month + '/' + date.date.day);
     }else{
-      $("#weekday"+ index).text(day.date.weekday_short + ' ' + day.date.month + '/' + day.date.day);
+      $("#weekday"+ index).text(date.date.weekday_short + ' ' + date.date.month + '/' + date.date.day);
     }
-    $("#highTemp"+ index).text("High: " + day.high.fahrenheit +" F");
-    $("#lowTemp"+ index).text("Low: " + day.low.fahrenheit + " F");
-    $("#weather"+ index).text(day.conditions);
-    $("#icon"+ index).attr("src", day.icon_url);
+    $("#highTemp"+ index).text("High: " + date.high.fahrenheit +" F");
+    $("#lowTemp"+ index).text("Low: " + date.low.fahrenheit + " F");
+    $("#weather"+ index).text(date.conditions);
+    $("#icon"+ index).attr("src", date.icon_url);
   },
 
-    //Changes all fahr temps to celsius. threeDay should be an array
+  //Changes all fahr temps to celsius. threeDay should be an array
   convertToC: function(current, threeDay){
     $("#temp").text(current.tempC +" C");
     $("#feelsLike").text(current.feelsLikeC +" C");
@@ -202,7 +204,7 @@ var view = {
       $("#highTemp"+ i).text("High: " + threeDay[i].high.fahrenheit +" F");
       $("#lowTemp"+ i).text("Low: " + threeDay[i].low.fahrenheit +" F");
     }
-  },
+  }
 };
 
 
