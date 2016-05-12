@@ -144,36 +144,31 @@ var view = {
     $("#wind").text("Wind: " + currentWeather.wind);
   },
 
-  //Renders the three day forecast
+  //Renders the three day forecast. Input will be controller.getThreeDayForecast()
   renderthreeDayForecast: function(threeDayForecast){
     view.createThreeDayDivs(threeDayForecast);
     for (var i = 0; i < threeDayForecast.length; i++){
-      view.addWeatherTags("#day" + i, i);
+      view.addWeatherTags(i);
       view.fillWeatherContent(threeDayForecast[i], i);
     }
   },
 
-  /*Creates four divs each with a class of .threeDay in order to show the three day forecast properly (a seperate div for today(id="day0"), tomorrow(id="day1"), day 2(id="day2"), and day 3(id="day3"))*/
-  createThreeDayDivs: function(days){
-    for (var i = 0; i < days.length; i++){
+  /*Creates four divs each with a class of .threeDay in order to show the three day forecast properly (a seperate div for today(id="day0"), tomorrow(id="day1"), day 2(id="day2"), and day 3(id="day3")) */
+  createThreeDayDivs: function(array){
+    for (var i = 0; i < array.length; i++){
         newDiv = document.createElement("div");
         $(newDiv).attr("id","day"+ i).addClass('threeDay').appendTo("#threeDayGrid");
     }  
   },
 
-  /*
-  addWeatherTags adds weather ready html tags and ids to each three day forecast div created by createThreeDayDivs. 
-
-  When entering the selector enter as you would when choosing a selector using jQuery. For instance, if the selector you want to has an id named day0, use "#day0" as the selector parameter. 
-
-  Index corresponds to the index in data.threeDay. It will be used as a suffix for all the ids created by this function.
-  */
-  addWeatherTags: function(selector, index){
-    $(selector).append("<h3 id =weekday" + index +"></h3>");
-    $(selector).append("<p id =highTemp" + index +"></p>");
-    $(selector).append("<p id =lowTemp" + index +"></p>");
-    $(selector).append("<p id =weather" + index +"></p>");
-    $(selector).append("<img id =icon" + index +">");
+  // adds weather tags to div. Index is used to locate div with an id of "day" + index. Will be used for displaying three day forecast
+  addWeatherTags: function(index){
+    $("#day" + index)
+      .append("<h3 id =weekday" + index +"></h3>")
+      .append("<p id =highTemp" + index +"></p>")
+      .append("<p id =lowTemp" + index +"></p>")
+      .append("<p id =weather" + index +"></p>")
+      .append("<img id =icon" + index +">");
   },
 
   /*fillWeatherContent is closely related to addWeatherTags. Enter the same index used for that function in this one to fill in the proper information inside the html tags in each div*/
@@ -189,7 +184,7 @@ var view = {
     $("#icon"+ index).attr("src", day.icon_url);
   },
 
-    //changes all fahr temps to celsius. threeDay should be an array
+    //Changes all fahr temps to celsius. threeDay should be an array
   convertToC: function(current, threeDay){
     $("#temp").text(current.tempC +" C");
     $("#feelsLike").text(current.feelsLikeC +" C");
@@ -199,7 +194,7 @@ var view = {
     }
   },
 
-  // changes all celsius temps to fahr. threeDay should be an array
+  //Changes all celsius temps to fahr. threeDay should be an array
   convertToF: function(current, threeDay){
     $("#temp").text(current.temp +" F");
     $("#feelsLike").text(current.feelsLike +" F");
@@ -234,10 +229,10 @@ buttons = {
     });
   },
 
+  //Creates click handler for the "Convert To " button. 
   createFCClick: function(){
     $("#FCToggle").on("click", function(){
       if($(this).text() === "Convert To "+ String.fromCharCode(176) + "C"){
-        console.log(controller.getThreeDayForecast());
         view.convertToC(controller.getCurrentWeather(),controller.getThreeDayForecast());
         $(this).text("Convert To "+ String.fromCharCode(176) + "F");
       } else {
