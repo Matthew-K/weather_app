@@ -178,6 +178,10 @@ h1{
 		margin-right:15px;
 		margin-left: 15px;
 	}
+
+	#FCToggle{
+		margin-left: 15px;
+	}
 }
 
 
@@ -206,8 +210,8 @@ h1{
 	}
 
 	#FCToggle{
-		margin-top: 25px;
-		margin-bottom: 5px;
+		margin: 25px 0 5px 0;
+
 	}
 	
 	#threeDayHeader{
