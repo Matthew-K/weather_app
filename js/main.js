@@ -201,6 +201,7 @@ buttons = {
       $(this).addClass("active");
       $("#current").removeClass("hide");
       $("#threeDayGrid").removeClass("flex").addClass("hide");
+      $("#FCDiv").removeClass("align-left");
     });
   },
 
@@ -211,11 +212,17 @@ buttons = {
       $("#currentButton").removeClass("active");
       $(this).addClass("active");
       $("#threeDayGrid").removeClass("hide").addClass("flex");
+      $("#FCDiv").addClass("align-left");
     });
   },
 
   createFCClick: function(){
     $("#FCToggle").on("click", function(){
+      if($(this).text() === "Change to "+ String.fromCharCode(176) + "C"){
+        $(this).text("Change to "+ String.fromCharCode(176) + "F");
+      } else {
+        $(this).text("Change to "+ String.fromCharCode(176) + "C");
+      }
       $(".fahr").text("Changing to C!");
     });
   },
