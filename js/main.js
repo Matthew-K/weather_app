@@ -8,6 +8,7 @@ var data = {
     temp: null,
     tempC: null,
     feelsLike: null,
+    feelsLikeC: null,
     conditions: null,
     icon: null,
     humidity: null,
@@ -62,6 +63,7 @@ var controller = {
       temp: currentInfo.temp_f,
       tempC: currentInfo.temp_c,
       feelsLike: currentInfo.feelslike_f,
+      feelsLikeC: currentInfo.feelslike_c,
       conditions: currentInfo.weather,
       icon: currentInfo.icon_url,
       precipChance: currentInfo.precip_today_metric,
@@ -82,9 +84,9 @@ var controller = {
   getWeatherInfo: function(){
     $.ajax({
         type: 'GET',
-        // If you wish to make changes to the app without calling the API each time you refresh the browser, uncomment the url key with the empty string value below and comment out the url key with the actual url value below that.
-        url: "",
-        // url: "http://api.wunderground.com/api/b857cdba14540849/forecast/geolookup/conditions/q/autoip.json?",
+        // If you wish to make changes to the app without calling the API each time you refresh the browser, uncomment the url key with the empty string value below and comment out the url key with the actual url value below that. Note: The convert button currently does not work when working with the example.
+        // url: "",
+        url: "http://api.wunderground.com/api/b857cdba14540849/forecast/geolookup/conditions/q/autoip.json?",
         success: function(info) {
           // console.log("----------------------------");
           // console.log("   Data from API received   ");
@@ -96,6 +98,8 @@ var controller = {
           $( "<p id='error'>There was an error with the API call. Here is an example that simulates the call.<p>" ).insertBefore("#current" );
           //example_conditions and example_forecast are from the file example.js
           controller.setCurrent(example_conditions.current_observation);
+          // console.log(example_forecast.forecast.simpleforecast.forecastday);
+          // controller.setthreeDay(example_forecast.forecast.simpleforecast.forecastday);
           view.renderCurrent(data.current);
           view.renderthreeDayForecast(example_forecast.forecast.simpleforecast.forecastday);
         }
@@ -189,7 +193,27 @@ var view = {
     $("#lowTemp"+ index).text("Low: " + day.low.fahrenheit + " F");
     $("#weather"+ index).text(day.conditions);
     $("#icon"+ index).attr("src", day.icon_url);
-  }
+  },
+
+    //changes all fahr temps to celsius. threeDay should be an array
+  convertToC: function(current, threeDay){
+    $("#temp").text(current.tempC +" C");
+    $("#feelsLike").text(current.feelsLikeC +" C");
+    for (var i = 0; i < threeDay.length; i++){   
+      $("#highTemp"+ i).text("High: " + threeDay[i].high.celsius +" C");
+      $("#lowTemp"+ i).text("Low: " + threeDay[i].low.celsius +" C");
+    }
+  },
+
+  // changes all celsius temps to fahr. threeDay should be an array
+  convertToF: function(current, threeDay){
+    $("#temp").text(current.temp +" F");
+    $("#feelsLike").text(current.feelsLike +" F");
+    for (var i = 0; i < threeDay.length; i++){   
+      $("#highTemp"+ i).text("High: " + threeDay[i].high.fahrenheit +" F");
+      $("#lowTemp"+ i).text("Low: " + threeDay[i].low.fahrenheit +" F");
+    }
+  },
 };
 
 
@@ -218,12 +242,14 @@ buttons = {
 
   createFCClick: function(){
     $("#FCToggle").on("click", function(){
-      if($(this).text() === "Change to "+ String.fromCharCode(176) + "C"){
-        $(this).text("Change to "+ String.fromCharCode(176) + "F");
+      if($(this).text() === "Convert To "+ String.fromCharCode(176) + "C"){
+        console.log(controller.getThreeDayForecast());
+        view.convertToC(controller.getCurrentWeather(),controller.getThreeDayForecast());
+        $(this).text("Convert To "+ String.fromCharCode(176) + "F");
       } else {
-        $(this).text("Change to "+ String.fromCharCode(176) + "C");
+        $(this).text("Convert To "+ String.fromCharCode(176) + "C");
+        view.convertToF(controller.getCurrentWeather(),controller.getThreeDayForecast());
       }
-      $(".fahr").text("Changing to C!");
     });
   },
 
