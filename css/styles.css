@@ -49,6 +49,10 @@ nav{
 	width: 50%;
 }
 
+.col-12{
+	width: 100%;
+}
+
 h1{
 	margin:12px 0;
 	font-weight: normal;
@@ -148,7 +152,22 @@ h1{
 
 #FCToggle{
 	margin: 20px 0;
+	color: #2F2F2F;
 	height: 30px;
+	border: 1px solid #bbb;
+	background: #ddd;
+	outline: none;
+	border-radius: 3px;
+}
+
+#FCToggle:hover{
+	border: 1px solid #aaa;
+	background: #ccc;
+}
+
+#FCToggle:active{
+	border: 1px solid #999;
+	background: #bbb;
 }
 
 #logo{
@@ -200,7 +219,7 @@ h1{
 
 	#current{
 		display: block;
-		max-width: 100%;
+		width: 100%;
 		order: 0;
 	}
 

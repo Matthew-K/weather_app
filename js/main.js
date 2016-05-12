@@ -85,8 +85,8 @@ var controller = {
     $.ajax({
         type: 'GET',
         // If you wish to make changes to the app without calling the API each time you refresh the browser, uncomment the url key with the empty string value below and comment out the url key with the actual url value below that.
-        url: "",
-        // url: "http://api.wunderground.com/api/b857cdba14540849/forecast/geolookup/conditions/q/autoip.json?",
+        // url: "",
+        url: "http://api.wunderground.com/api/b857cdba14540849/forecast/geolookup/conditions/q/autoip.json?",
         success: function(info) {
           // console.log("----------------------------");
           // console.log("   Data from API received   ");
@@ -233,6 +233,7 @@ buttons = {
   //Creates click handler for the "Convert To " button. 
   createFCClick: function(){
     $("#FCToggle").on("click", function(){
+      console.log("clicked")
       if($(this).text() === "Convert To "+ String.fromCharCode(176) + "C"){
         view.convertToC(controller.getCurrentWeather(),controller.getThreeDayForecast());
         $(this).text("Convert To "+ String.fromCharCode(176) + "F");
