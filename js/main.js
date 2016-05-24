@@ -233,7 +233,6 @@ buttons = {
   //Creates click handler for the "Convert To " button. 
   createFCClick: function(){
     $("#FCToggle").on("click", function(){
-      console.log("clicked")
       if($(this).text() === "Convert To "+ String.fromCharCode(176) + "C"){
         view.convertToC(controller.getCurrentWeather(),controller.getThreeDayForecast());
         $(this).text("Convert To "+ String.fromCharCode(176) + "F");

@@ -2,6 +2,10 @@
 	box-sizing: border-box 
 }
 
+html{
+	background: hsla(208,100%,95%,1);
+}
+
 body{
 	background: linear-gradient(hsla(208,100%,80%,1), hsla(208,100%,95%,1));
 	font-family: 'Source Sans Pro', sans-serif;
@@ -171,7 +175,7 @@ h1{
 }
 
 #logo{
-	width:100%;
+	width:75%;
 	float:right;
 	background:white;
 	padding: 5px;
@@ -200,6 +204,23 @@ h1{
 
 	#FCToggle{
 		margin-left: 15px;
+	}
+
+	#headerTitle{
+		width: 100%;
+		text-align: center;
+		margin-bottom: 15px;
+	}
+
+	#headerLogo{
+		width: 100%;
+	}
+
+	#logo{
+		max-width: 350px;
+		float: none;
+		display: block;
+		margin: 0 auto;
 	}
 }
 
@@ -242,6 +263,7 @@ h1{
 	#threeDayGrid{
 		display: block;
 		margin-top: 15px;
+		margin-bottom: 15px;
 		order: 3;
 	}
 
