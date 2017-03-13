@@ -84,9 +84,7 @@ var controller = {
   getWeatherInfo: function(){
     $.ajax({
         type: 'GET',
-        // If you wish to make changes to the app without calling the API each time you refresh the browser, uncomment the url key with the empty string value below and comment out the url key with the actual url value below that.
-        // url: "",
-        url: "http://api.wunderground.com/api/b857cdba14540849/forecast/geolookup/conditions/q/autoip.json?",
+        url: "",
         success: function(info) {
           // console.log("----------------------------");
           // console.log("   Data from API received   ");
